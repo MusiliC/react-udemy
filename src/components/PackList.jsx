@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Item } from "./Item";
 
-const PackList = () => {
-  const items = [
+const PackList = ({items, onDelete, onEdit}) => {
+  const data = [
     { id: 1, desc: "passport", quantity: 2, packed: false },
     { id: 2, desc: "socks", quantity: 3, packed: true },
   ];
@@ -11,7 +13,7 @@ const PackList = () => {
       <div>
         <ul className="flex gap-10 ">
           {items.map((item) => (
-          <Item key={item.desc} {...item} />
+          <Item key={item.desc} item={item} onDelete = {onDelete} onEdit = {onEdit}  />
           ))}
         </ul>
       </div>
