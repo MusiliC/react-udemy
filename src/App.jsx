@@ -16,6 +16,9 @@ function App() {
     setItems((items) => items.filter((item) => item.id !== id));
   };
 
+
+
+
   const handleToggle = (id) => {
     setItems((items) =>
       items.map((item) =>
@@ -34,7 +37,7 @@ function App() {
       <Logo />
       <Form onAddItems={handleAddItems} />
       <PackList items={items} onDelete={handleDeleteItem} onEdit = {handleToggle}  />
-      <Stat />
+      <Stat items = {items} />
     </>
   );
 }
