@@ -5,7 +5,8 @@ import Form from "./components/Form";
 import { Logo } from "./components/Logo";
 import PackList from "./components/PackList";
 import Stat from "./components/Stat";
-import Accordion from "./components/Accordion";
+import Accordion from "./components/accordion/Accordion";
+
 
 function App() {
   const [items, setItems] = useState([]);
