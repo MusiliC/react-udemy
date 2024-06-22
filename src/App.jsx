@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import { Logo } from "./components/Logo";
 import PackList from "./components/PackList";
 import Stat from "./components/Stat";
+import Accordion from "./components/Accordion";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -35,9 +37,10 @@ function App() {
   return (
     <>
       <Logo />
-      <Form onAddItems={handleAddItems} />
+      <Accordion/>
+      {/* <Form onAddItems={handleAddItems} />
       <PackList items={items} onDelete={handleDeleteItem} onEdit = {handleToggle}  />
-      <Stat items = {items} />
+      <Stat items = {items} /> */}
     </>
   );
 }
