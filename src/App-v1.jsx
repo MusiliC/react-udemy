@@ -51,12 +51,12 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const API_KEY = "b13265b1";
+
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
@@ -64,9 +64,7 @@ export default function App() {
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
-    fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=power`)
-    .then((res) => res.json())
-    .then((data) => console.log(data.Search));
+
 
   return (
     <>
