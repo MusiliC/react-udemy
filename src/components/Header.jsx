@@ -3,9 +3,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>
-        <h1 className='text-2xl'>The React QUiz</h1>
-    </div>
+     <header className='app-header'>      
+      <h1>The React Quiz</h1>
+    </header>
   )
 }
 
