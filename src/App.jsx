@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 import NextButton from "./components/NextButton";
+import Progress from "./components/Progress";
 
 const initialState = {
   questions: [],
@@ -55,7 +56,7 @@ function reducer(state, action) {
       return {
         ...state,
         index: state.index + 1,
-        answer: null
+        answer: null,
       };
 
     default:
@@ -70,6 +71,7 @@ const App = () => {
   );
 
   const numQuestions = questions.length;
+  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0 )
 
   const fetchQuestions = async () => {
     try {
@@ -101,12 +103,13 @@ const App = () => {
 
         {status === "active" && (
           <>
+            <Progress i={index} numQuestions={numQuestions} answer={answer} maxPoints = {maxPoints} points={points} />
             <Question
               question={questions[index]}
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton dispatch={dispatch} answer={answer}/>
+            <NextButton dispatch={dispatch} answer={answer} />
           </>
         )}
       </MyMain>
