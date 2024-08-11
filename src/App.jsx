@@ -10,6 +10,8 @@ import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
 import FinishedScreen from "./components/FinishedScreen";
+import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 
 const initialState = {
   questions: [],
@@ -19,7 +21,10 @@ const initialState = {
   answer: null,
   points: 0,
   highScore: 0,
+  secRemaining: null,
 };
+
+let SEC_PER_QUESTION = 30;
 
 function reducer(state, action) {
   switch (action.type) {
@@ -40,6 +45,8 @@ function reducer(state, action) {
       return {
         ...state,
         status: "active",
+        secRemaining: 10,
+        // secRemaining: state.questions.length * SEC_PER_QUESTION,
       };
 
     case "newAnswer":
@@ -71,7 +78,21 @@ function reducer(state, action) {
 
     case "restart":
       return {
-        state: {...initialState, questions: state.questions, status: 'ready'},
+        state: {
+          ...state,
+          points: 0,
+          highScore: 0,
+          index: 0,
+          answer: null,
+          status: "ready",
+        },
+      };
+
+    case "tik":
+      return {
+        ...state,
+        secRemaining: state.secRemaining - 1,
+        status: state.secRemaining === 0 ? "finished" : state.status,
       };
 
     default:
@@ -80,11 +101,13 @@ function reducer(state, action) {
 }
 
 const App = () => {
-  const [{ questions, status, index, answer, points, highScore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, index, answer, points, highScore, secRemaining },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
-  const numQuestions = questions.length;
-  const maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
+  let numQuestions = questions.length;
+  let maxPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
 
   const fetchQuestions = async () => {
     try {
@@ -128,12 +151,15 @@ const App = () => {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextButton
-              dispatch={dispatch}
-              i={index}
-              numQuestions={numQuestions}
-              answer={answer}
-            />
+            <Footer>
+              <Timer dispatch={dispatch} secRemaining={secRemaining} />
+              <NextButton
+                dispatch={dispatch}
+                i={index}
+                numQuestions={numQuestions}
+                answer={answer}
+              />
+            </Footer>
           </>
         )}
 
@@ -142,7 +168,7 @@ const App = () => {
             maxPoints={maxPoints}
             points={points}
             highScore={highScore}
-            dispatch = {dispatch}
+            dispatch={dispatch}
           />
         )}
       </MyMain>
