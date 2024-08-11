@@ -45,8 +45,8 @@ function reducer(state, action) {
       return {
         ...state,
         status: "active",
-        secRemaining: 10,
-        // secRemaining: state.questions.length * SEC_PER_QUESTION,
+        //secRemaining: 10,
+         secRemaining: state.questions.length * SEC_PER_QUESTION,
       };
 
     case "newAnswer":
@@ -78,14 +78,12 @@ function reducer(state, action) {
 
     case "restart":
       return {
-        state: {
-          ...state,
-          points: 0,
-          highScore: 0,
-          index: 0,
-          answer: null,
-          status: "ready",
-        },
+        ...state,
+        points: 0,
+        highScore: 0,
+        index: 0,
+        answer: null,
+        status: "ready",
       };
 
     case "tik":
