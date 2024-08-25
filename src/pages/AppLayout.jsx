@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import AppNav from "./AppNav";
+import React from 'react'
+import AppNav from '../components/AppNav'
 
 const AppLayout = () => {
   return (
     <div>
-      <AppNav />
-      AppLayout
+        <AppNav/>
+        <p>App</p>
     </div>
-  );
-};
+  )
+}
 
-export default AppLayout;
+export default AppLayout

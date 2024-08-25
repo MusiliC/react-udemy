@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
-
-const PageNotFound = () => {
+export default function PageNotFound() {
   return (
-    <div>Not Found :(</div>
-  )
+    <div>
+      <h1>Page not found 😢</h1>
+    </div>
+  );
 }
-
-export default PageNotFound
