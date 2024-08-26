@@ -7,20 +7,22 @@ import PageNotFound from "./pages/PageNotFound";
 import Homepage from "./pages/Homepage";
 import AppLayout from "./pages/AppLayout";
 import Login from "./pages/Login";
-import styles from "./components/PageNav.module.css"
-
-
+import styles from "./components/PageNav.module.css";
 
 const App = () => {
   return (
     <BrowserRouter>
-
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route  path="/app" element={<AppLayout />}  />
+        <Route index element={<Homepage />} />
+        <Route path="app" element={<AppLayout />}>
+          <Route index element={<p>Hello from cities</p>} />
+          <Route path="cities" element={<p>Hello from cities</p>} />
+          <Route path="countries" element={<p>Hello from countries list</p>} />
+          <Route path="form" element={<p>Form Element</p>} />
+        </Route>
         <Route path="product" element={<Product />} />
-        <Route path="pricing" element={<Pricing />} />\
-          <Route path="login" className = {styles.ctaLink} element={<Login />} />
+        <Route path="pricing" element={<Pricing />} />
+        <Route path="login" className={styles.ctaLink} element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
