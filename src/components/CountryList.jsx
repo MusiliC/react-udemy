@@ -6,8 +6,12 @@ import Spinner from "./Spinner";
 import CityItem from "./CityItem";
 import Message from "./Message";
 import CountryItem from "./CountryItem";
+import {useCities} from "../context/CitiesContext"
 
-const CountryList = ({ cities, loading }) => {
+const CountryList = () => {
+
+  const {cities, loading} = useCities();  
+
   if (loading) return <Spinner />;
 
   if (!cities.length)

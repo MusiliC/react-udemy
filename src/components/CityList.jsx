@@ -5,8 +5,11 @@ import styles from "./CityList.module.css"
 import Spinner from './Spinner'
 import CityItem from './CityItem'
 import Message from './Message'
+import { useCities } from '../context/CitiesContext'
 
-const CityList = ({cities, loading}) => {
+const CityList = () => {
+
+    const {cities, loading} = useCities();
 
     if(loading) return <Spinner/>
 
