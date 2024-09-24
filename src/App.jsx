@@ -14,6 +14,7 @@ import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider } from "./context/CitiesContext";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
 
 const App = () => {
   return (
@@ -22,7 +23,16 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route index element={<Homepage />} />
-            <Route path="app" element={<AppLayout />}>
+
+            <Route
+              path="app"
+              element={
+                <ProtectedRoutes>
+                  {" "}
+                  <AppLayout />{" "}
+                </ProtectedRoutes>
+              }
+            >
               <Route index element={<Navigate replace to="cities" />} />
               <Route path="cities" element={<CityList />} />
               <Route path="cities/:id" element={<City />} />
