@@ -30,14 +30,12 @@ function reducer(state, action) {
   }
 }
 
-
 const FAKE_USER = {
-  name: "Jack",
+  name: "Musili",
   email: "jack@example.com",
   password: "qwerty",
   avatar: "https://i.pravatar.cc/100?u=zz",
 };
-
 
 function AuthProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
@@ -46,13 +44,13 @@ function AuthProvider({ children }) {
   );
 
   function login(email, password) {
-    if(email === FAKE_USER.email && password === FAKE_USER.password){
-         dispatch({type: 'login', payload: FAKE_USER})
+    if (email === FAKE_USER.email && password === FAKE_USER.password) {
+      dispatch({ type: "login", payload: FAKE_USER });
     }
   }
 
   function logout() {
-     dispatch({type: 'logout'})
+    dispatch({ type: "logout" });
   }
 
   return (
@@ -74,7 +72,8 @@ function useAuth() {
 
   if (context === undefined)
     throw new Error("This context was used outside Auth Provider");
+
+  return context;
 }
 
-
-export {AuthProvider, useAuth}
+export { AuthProvider, useAuth };
