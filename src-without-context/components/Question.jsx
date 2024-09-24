@@ -2,20 +2,13 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import Options from "./Options";
-import { useQuiz } from "../context/QuizContext";
 
-const Question = () => {
-  const {questions, index } = useQuiz();
-
-  const question = questions.at(index);
-
-
-  
+const Question = ({ question, dispatch, answer }) => {
   return (
     <div>
       <h4>{question.question}</h4>
 
-        <Options question = {question} />
+        <Options question={question}  dispatch = {dispatch} answer={answer} />
     </div>
   );
 };

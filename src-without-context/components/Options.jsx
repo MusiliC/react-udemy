@@ -1,13 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useQuiz } from "../context/QuizContext";
 
-const Options = ({question}) => {
-  const { dispatch,answer } = useQuiz();
-
+const Options = ({ question, dispatch, answer }) => {
   const hasAnswered = answer != null;
-  
   return (
     <div className="options">
       {question.options.map((option, i) => (

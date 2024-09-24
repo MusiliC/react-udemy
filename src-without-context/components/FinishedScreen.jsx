@@ -1,12 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useQuiz } from "../context/QuizContext";
 
-const FinishedScreen = () => {
-
-  const { points, maxPoints , highScore, dispatch} = useQuiz();
-
+const FinishedScreen = ({ points, maxPoints , highScore, dispatch}) => {
   const percentage = (points / maxPoints) * 100;
 
   return (

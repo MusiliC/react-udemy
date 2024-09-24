@@ -1,19 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useQuiz } from "../context/QuizContext";
 
-const Progress = () => {
-
-const { numQuestions, points, maxPoints, answer, index } = useQuiz();
-
-  
+const Progress = ({ i, numQuestions, points, maxPoints, answer }) => {
   return (
     <header className="progress">
-      <progress max={numQuestions}  value={index + (answer != null ? 1 : 0)} />
+      <progress max={numQuestions} value={i + Number(answer != null)} />
 
       <p>
-        Question <strong>{index + 1}</strong>/ {numQuestions}
+        Question <strong>{i + 1}</strong>/ {numQuestions}
       </p>
 
       <p>

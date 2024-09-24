@@ -1,14 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { useQuiz } from "../context/QuizContext";
 
-const NextButton = () => {
-
-   const {dispatch,answer, index, numQuestions } = useQuiz();
-
+const NextButton = ({ dispatch, answer, i, numQuestions }) => {
   if (answer == null) return null;
-  if (index < numQuestions - 1)
+  if (i < numQuestions - 1)
     return (
       <button
         className="btn btn-ui"
@@ -20,7 +16,7 @@ const NextButton = () => {
       </button>
     );
 
-    if (index == numQuestions - 1)
+    if (i == numQuestions - 1)
     return (
       <button
         className="btn btn-ui"
