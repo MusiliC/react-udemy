@@ -1,12 +1,18 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import CreateCustomer from "./features/customers/CreateCustomer";
+import Customer from "./features/customers/Customer";
+import AccountOperations from "./features/accounts/AccountOperations";
+import BalanceDisplay from "./features/accounts/BalanceDisplay";
 
-
-
-const App = () => {
+function App() {
   return (
-<p>Hey</p>
+    <div>
+      <h1>🏦 The React-Redux Bank ⚛️</h1>
+      <CreateCustomer />
+      <Customer />
+      <AccountOperations />
+      <BalanceDisplay />
+    </div>
   );
-};
+}
 
 export default App;
