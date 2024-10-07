@@ -1,14 +1,20 @@
 /* eslint-disable no-unused-vars */
 
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
-const initialState = {
+const initialStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
 };
 
-function reducer(state = initialState, action) {
+const initialStateCustomer = {
+  name: "",
+  id: "",
+  createdAt: "",
+};
+
+function accountReducer(state = initialStateAccount, action) {
   switch (action.type) {
     case "account/deposit":
       return {
@@ -28,11 +34,10 @@ function reducer(state = initialState, action) {
         ...state,
         loan: action.payload.amount,
         loanPurpose: action.payload.purpose,
-        balance: state.balance + action.payload.amount
+        balance: state.balance + action.payload.amount,
       };
 
     case "account/payLoan":
-   
       return {
         ...state,
         loan: 0,
@@ -45,12 +50,9 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer)
-
-
 
 function deposit(amount) {
-return  { type: "account/deposit", payload: amount };
+  return { type: "account/deposit", payload: amount };
 }
 
 function withdrawal(amount) {
@@ -65,15 +67,69 @@ function requestLoan(amount, purpose) {
 }
 
 function payLoan() {
-   return { type: "account/payLoan" };
+  return { type: "account/payLoan" };
 }
 
 
-store.dispatch(deposit(500))
-store.dispatch(withdrawal(200))
-store.dispatch(requestLoan(1000, "Buy a car"))
+
+function createCustomer(name, id) {
+  return {
+    type: "customer/createCustomer",
+    payload: {
+      name,
+      id,
+      createdAt: new Date().toISOString(),
+    },
+  };
+}
+
+function updateName(name) {
+  return {
+    type: "customer/updateName",
+    payload: {
+      name,
+    },
+  };
+}
+
+function customerReducer(state = initialStateCustomer, action) {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        name: action.payload.name,
+        id: action.payload.id,
+        createdAt: action.payload.createdAt,
+      };
+
+    case "customer/updateName":
+      return {
+        ...state,
+        name: action.payload.name,
+      };
+
+
+    default:
+      return state;
+  }
+}
+
+
+
+const rootReducer = combineReducers({
+ account:  accountReducer,
+ customer:  customerReducer
+});
+
+const store = createStore(rootReducer);
+
+
+
+store.dispatch(createCustomer("Musili", "100200"));
+
+store.dispatch(deposit(500));
+store.dispatch(withdrawal(200));
+store.dispatch(requestLoan(1000, "Buy a car"));
 store.dispatch(payLoan());
 
 console.log(store.getState());
-
-
