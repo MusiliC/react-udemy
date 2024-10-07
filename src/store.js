@@ -1,4 +1,7 @@
 /* eslint-disable no-unused-vars */
+
+import { createStore } from "redux";
+
 const initialState = {
   balance: 0,
   loan: 0,
@@ -23,11 +26,13 @@ function reducer(state = initialState, action) {
       if (state.loan > 0) return state;
       return {
         ...state,
-        loan: action.payload,
+        loan: action.payload.amount,
+        loanPurpose: action.payload.purpose,
+        balance: state.balance + action.payload.amount
       };
 
     case "account/payLoan":
-      if (state.loan > 0) return state;
+   
       return {
         ...state,
         loan: 0,
@@ -39,3 +44,36 @@ function reducer(state = initialState, action) {
       return state;
   }
 }
+
+const store = createStore(reducer)
+
+
+
+function deposit(amount) {
+return  { type: "account/deposit", payload: amount };
+}
+
+function withdrawal(amount) {
+  return { type: "account/withdrawal", payload: amount };
+}
+
+function requestLoan(amount, purpose) {
+  return {
+    type: "account/requestLoan",
+    payload: { amount, purpose },
+  };
+}
+
+function payLoan() {
+   return { type: "account/payLoan" };
+}
+
+
+store.dispatch(deposit(500))
+store.dispatch(withdrawal(200))
+store.dispatch(requestLoan(1000, "Buy a car"))
+store.dispatch(payLoan());
+
+console.log(store.getState());
+
+
