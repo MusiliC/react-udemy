@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const initialStateCustomer = {
-  name: "",
-  id: "",
+  fullName: "",
+  nationalId: "",
   createdAt: "",
 };
 
@@ -12,15 +12,15 @@ export default function customerReducer(state = initialStateCustomer, action) {
     case "customer/createCustomer":
       return {
         ...state,
-        name: action.payload.name,
-        id: action.payload.id,
+        fullName: action.payload.fullName,
+        nationalId: action.payload.nationalId,
         createdAt: action.payload.createdAt,
       };
 
     case "customer/updateName":
       return {
         ...state,
-        name: action.payload.name,
+        fullName: action.payload.fullName,
       };
 
     default:
@@ -28,22 +28,22 @@ export default function customerReducer(state = initialStateCustomer, action) {
   }
 }
 
-export function createCustomer(name, id) {
+export function createCustomer(fullName, nationalId) {
   return {
     type: "customer/createCustomer",
     payload: {
-      name,
-      id,
+      fullName,
+      nationalId,
       createdAt: new Date().toISOString(),
     },
   };
 }
 
-export function updateName(name) {
+export function updateName(fullName) {
   return {
     type: "customer/updateName",
     payload: {
-      name,
+      fullName,
     },
   };
 }
