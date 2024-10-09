@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
+    "@reduxjs/toolkit": "^2.2.8",
     "json-server": "^1.0.0-beta.1",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
